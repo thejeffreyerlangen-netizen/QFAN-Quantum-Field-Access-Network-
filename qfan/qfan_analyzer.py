@@ -1,5 +1,4 @@
-"""Compatibility exports for structured analyzer logging."""
+"""Compatibility exports for canonical analyzer implementation."""
+from .analysis.analyzer import AnalysisSession, AnalyzerWrappedNotify, classify
 
-from qfan_analyzer import AnalysisSession, classify
-
-__all__ = ["AnalysisSession", "classify"]
+__all__ = ["AnalysisSession", "AnalyzerWrappedNotify", "classify"]

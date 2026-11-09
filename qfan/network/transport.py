@@ -1,5 +1,1 @@
-"""Network transport compatibility wrappers."""
-
-from substrates import MultiSubstrateBus
-
-__all__ = ["MultiSubstrateBus"]
+from .carriers import *  # noqa: F401,F403

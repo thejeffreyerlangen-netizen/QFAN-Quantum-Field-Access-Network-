@@ -1,5 +1,4 @@
-"""Analysis package entry point."""
+"""Canonical analysis package exports."""
+from .analyzer import AnalysisSession, AnalyzerWrappedNotify, classify
 
-from .qfan_analyzer import AnalysisSession, classify
-
-__all__ = ["AnalysisSession", "classify"]
+__all__ = ["AnalysisSession", "AnalyzerWrappedNotify", "classify"]

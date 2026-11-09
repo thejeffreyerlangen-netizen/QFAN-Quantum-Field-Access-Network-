@@ -1,5 +1,4 @@
-"""Compatibility exports for field clock synchronization."""
-
-from field_sync import TaktSync
+"""Compatibility exports for canonical clock synchronization."""
+from .core.field_sync import TaktSync
 
 __all__ = ["TaktSync"]
