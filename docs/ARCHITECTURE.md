@@ -1,14 +1,16 @@
-# QFAN architecture (prototype)
+# QFAN architecture
 
-QFAN is currently a Python desktop prototype with a deterministic name-to-vector mapping, an in-process lease allocator, frame encoding, optional file mailbox, and UDP broadcast adapter. The UDP adapter uses the operating system's IP stack; it is not an IP-free networking implementation.
+The canonical implementation is organized as a Python package:
 
-## Modules
+- `qfan.core`: deterministic local name mapping (`qdns`), QIP formatting, in-process lease allocation, software phase-vector calculations, and timing utilities.
+- `qfan.network`: JSON frame codec, file mailbox, UDP/IP broadcast carrier, and BLE fragmentation/reassembly helpers.
+- `qfan.analysis`: JSONL logger and command-line report reader.
+- `qfan.app`: Tkinter desktop prototype.
 
-- `qfan_core.py`: phase-vector checks, equalizer values, smoothing, and handshake evaluation.
-- `qdns.py` / `qip.py`: deterministic local name mapping and identifier formatting.
-- `field_dhcp.py`: in-memory node/slot allocation for one process.
-- `field_burst.py` / `field_sync.py`: local scheduling and clock-offset simulation.
-- `substrates.py`: file mailbox, UDP adapter, and BLE frame-fragmentation helpers. BLE radio transport is not implemented.
-- `app.py`: Tkinter host/client UI.
+## Data path
 
-`qfan/` currently exposes a package entry point and compatibility import modules; implementation source remains at the repository root. See [SPEC.md](SPEC.md) for details and limitations.
+```text
+local name -> derived phase vector -> software validation -> encoded frame -> carrier
+```
+
+The UDP carrier uses ordinary IP networking. A local phase check or QIP value is not a cryptographic identity, and this prototype should not be exposed as a secure network service.

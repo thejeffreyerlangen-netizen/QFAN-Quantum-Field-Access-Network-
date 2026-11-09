@@ -1,4 +1,4 @@
-"""Compatibility entry point for the analyzer CLI."""
+"""Legacy CLI shim. Canonical implementation: `python -m qfan.analysis`."""
 from qfan.analysis.cli import main
 
 if __name__ == "__main__":
