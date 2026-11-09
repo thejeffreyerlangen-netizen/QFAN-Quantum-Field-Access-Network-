@@ -1,26 +1,22 @@
 # QFAN — Quantum Field Access Network
 
-A small Python desktop prototype for experimenting with deterministic naming, field-state checks, and interchangeable frame carriers. The current implementation is software simulation: the `adapter` carrier uses UDP over the operating system's IP network, and the QFAN checks are not a substitute for cryptographic authentication or transport security.
+QFAN is a Python desktop prototype for deterministic local names, software phase-vector checks, and interchangeable frame carriers. It is not a quantum network and does not provide production-grade authentication, encryption, or delivery guarantees. The UDP adapter uses the operating system's IP stack; the project is not IP-free in its current implementation.
 
-## Project layout
+## Layout
 
-- `qfan/` — package entry point and compatibility modules for the existing implementation.
-- `client/` and `host/` — Windows launch scripts and role-specific notes.
-- `docs/` — architecture and protocol notes.
-- `tests/` — focused package/codec smoke tests.
-- Root-level Python files remain as the implementation source for compatibility with existing scripts and imports.
+- `qfan/core/` — phase checks, local name mapping, identifiers, leases, timing.
+- `qfan/network/` — frame codec, local file mailbox, UDP carrier, BLE fragmentation helpers.
+- `qfan/analysis/` — JSONL logging and analyzer CLI.
+- `qfan/app.py` — Tk desktop prototype.
+- `client/`, `host/` — Windows installers and role launchers.
+- `docs/` — architecture and prototype specification.
+- `tests/` — package integration and codec tests.
 
-This is an incremental organization; the implementation has not yet been physically moved out of the repository root.
-
-## Requirements
-
-- Python 3.10 or newer
-- NumPy (`python -m pip install -r requirements.txt`)
-- Tkinter for the desktop UI (usually included with Python on Windows)
+Legacy root Python modules are small import shims only. The canonical implementations live under `qfan/`.
 
 ## Run
 
-From the repository root:
+Python 3.10+ and NumPy are required. Tkinter is required for the desktop UI.
 
 ```bash
 python -m pip install -r requirements.txt
@@ -28,12 +24,12 @@ python -m qfan --role host --name nexus
 python -m qfan --role client --name jan --target nexus
 ```
 
-Windows launchers are available in `host/` and `client/`. The optional file carrier requires both instances to use the same mailbox directory. The UDP adapter carrier is local-network transport and may be restricted by the host firewall.
+The file carrier requires a shared mailbox path. The UDP carrier is local-network broadcast and can be affected by firewall rules. BLE code only fragments and reassembles frames; it does not operate a Bluetooth radio.
 
-## Tests
+## Test
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-See [architecture](docs/ARCHITECTURE.md) and [specification](docs/SPEC.md) for the prototype's concepts and current limitations.
+Logs and reports are written under the repository root in `qfan_logs/` and `logs/`.

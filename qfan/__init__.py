@@ -1,5 +1,5 @@
-"""QFAN package entry points."""
+"""Canonical public core API."""
+from .core import FieldBurstSequencer, FieldDHCP, QDNS, QFANCore, TaktSync
+from .network import MultiSubstrateBus
 
-__version__ = "1.5.0"
-
-__all__ = ["__version__"]
+__all__ = ["FieldBurstSequencer", "FieldDHCP", "QDNS", "QFANCore", "TaktSync", "MultiSubstrateBus"]

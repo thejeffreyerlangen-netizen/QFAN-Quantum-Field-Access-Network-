@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-title QFAN Client Browser
+title QFAN Client
 cd /d "%~dp0.."
 set /p NAME="Client name: "
 if "%NAME%"=="" set NAME=client

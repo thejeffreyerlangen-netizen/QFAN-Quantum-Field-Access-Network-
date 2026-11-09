@@ -1,25 +1,2 @@
-"""Compatibility exports for frame carriers."""
-
-from substrates import (
-    AdapterSubstrate,
-    BaseSubstrate,
-    BLEReassembler,
-    BLESubstrate,
-    FileSubstrate,
-    MultiSubstrateBus,
-    decode_qfan_body,
-    encode_qfan_body,
-    fragment_ble,
-)
-
-__all__ = [
-    "AdapterSubstrate",
-    "BaseSubstrate",
-    "BLEReassembler",
-    "BLESubstrate",
-    "FileSubstrate",
-    "MultiSubstrateBus",
-    "decode_qfan_body",
-    "encode_qfan_body",
-    "fragment_ble",
-]
+"""Compatibility exports for the canonical carrier implementation."""
+from .network.carriers import *  # noqa: F401,F403

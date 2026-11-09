@@ -1,5 +1,4 @@
-"""Compatibility exports for field leases."""
-
-from field_dhcp import FieldDHCP
+"""Compatibility exports for canonical DHCP lease allocator."""
+from .core.field_dhcp import FieldDHCP
 
 __all__ = ["FieldDHCP"]
