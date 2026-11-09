@@ -1,16 +1,35 @@
-# QFAN architecture
+# QFAN-Repo-Struktur
 
-The canonical implementation is organized as a Python package:
-
-- `qfan.core`: deterministic local name mapping (`qdns`), QIP formatting, in-process lease allocation, software phase-vector calculations, and timing utilities.
-- `qfan.network`: JSON frame codec, file mailbox, UDP/IP broadcast carrier, and BLE fragmentation/reassembly helpers.
-- `qfan.analysis`: JSONL logger and command-line report reader.
-- `qfan.app`: Tkinter desktop prototype.
-
-## Data path
+Diese Übersicht dokumentiert die vorhandene Paketaufteilung. Einige gewünschte Modulnamen der vorgeschlagenen Zielstruktur sind im aktuellen Prototyp anders organisiert: die Haupt-App liegt in `qfan/app.py`; Kernlogik, Transport und Analyse sind in `qfan/core/`, `qfan/network/` und `qfan/analysis/` gruppiert. Die Root-Module für Engine, UI, Ledger und Vault bleiben aus Kompatibilitätsgründen erhalten.
 
 ```text
-local name -> derived phase vector -> software validation -> encoded frame -> carrier
+.
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── run_host.py
+├── run_client.py
+├── build_exe.bat
+├── host/
+│   ├── START_HOST.bat
+│   └── README.md
+├── client/
+│   ├── START_CLIENT.bat
+│   ├── INSTALL.bat
+│   └── README.md
+├── qfan/
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── app.py
+│   ├── core/
+│   ├── network/
+│   ├── analysis/
+│   └── tests/
+├── tests/
+└── docs/
+    ├── SPEC.md
+    ├── ARCHITECTURE.md
+    └── BETRIEB.md
 ```
 
-The UDP carrier uses ordinary IP networking. A local phase check or QIP value is not a cryptographic identity, and this prototype should not be exposed as a secure network service.
+Die zusätzlichen Root-Module enthalten derzeit den Host-/Client-Engine-Stack und werden von Tests und/oder der Anwendung importiert. Sie wurden nicht blind verschoben, damit bestehende Importpfade intakt bleiben. Die vorhandenen PDF-Handbücher sowie das ZIP-Artefakt bleiben unverändert im Repository-Root.
