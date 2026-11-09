@@ -1,4 +1,4 @@
-# QFAN package entry points.
+"""QFAN package entry points."""
 
 __version__ = "1.5.0"
 

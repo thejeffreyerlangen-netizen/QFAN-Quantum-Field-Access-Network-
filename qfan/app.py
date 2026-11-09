@@ -1,4 +1,4 @@
-"""Compatibility exports for the desktop application."""
+"""Compatibility import for the desktop app."""
 
 from app import QFANApp, main
 
