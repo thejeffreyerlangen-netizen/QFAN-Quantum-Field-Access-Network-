@@ -17,8 +17,11 @@ class FieldDHCP:
         self.core = QFANCore()
 
     def verify_and_lease(self, client_id: str, q, p) -> Dict[str, Any]:
-        q = np.asarray(q, dtype=float).reshape(3)
-        p = np.asarray(p, dtype=float).reshape(3)
+        check = self.core.liouville_check(q, p)
+        if not check["ok"]:
+            return {"status": "LOCKDOWN", "error": check.get("error", "Invalid phase-space vector"),
+                    "det_j": check["det_j"]}
+        q, p = np.asarray(q, dtype=float).reshape(3), np.asarray(p, dtype=float).reshape(3)
         for node_id, lease in self.active.items():
             if lease["client_id"] == client_id:
                 lease["last_seen"] = time.time()
